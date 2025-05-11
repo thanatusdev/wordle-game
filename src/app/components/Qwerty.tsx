@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { cn } from "../lib/utils";
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   store: any;
 };
 

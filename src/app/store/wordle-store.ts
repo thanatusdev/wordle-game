@@ -21,7 +21,7 @@ const store = {
   get inexactGuess() {
     return this.word
       .split("")
-      .filter((letter: string, i) => this.allGuesses.includes(letter));
+      .filter((letter: string) => this.allGuesses.includes(letter));
   },
   init() {
     this.word = words[Math.floor(Math.random() * words.length)];
