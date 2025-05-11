@@ -25,6 +25,21 @@ const Qwerty = ({ store }: Props) => {
                   `w-10 h-10 rounded-md m-px flex items-center justify-center uppercase border border-gray-400`,
                   bgColor,
                 )}
+                onClick={() => {
+                  if (store.won || store.lost) return;
+                  if (key === "Enter") {
+                    store.submitGuess();
+                  } else if (key === "Backspace") {
+                    store.guesses[store.currentGuess] = store.guesses[
+                      store.currentGuess
+                    ].slice(0, -1);
+                  } else if (
+                    store.guesses[store.currentGuess].length < 5 &&
+                    key.match(/^[a-zA-Z]$/)
+                  ) {
+                    store.guesses[store.currentGuess] += key.toLowerCase();
+                  }
+                }}
               >
                 {key.toUpperCase()}
               </button>
@@ -32,6 +47,28 @@ const Qwerty = ({ store }: Props) => {
           })}
         </div>
       ))}
+      <div className="flex md:hidden justify-center gap-1 mt-7 px-4">
+        <button
+          className="px-6 rounded-md m-px flex items-center justify-center uppercase border border-gray-400 bg-black"
+          onClick={() => {
+            if (store.won || store.lost) return;
+            store.guesses[store.currentGuess] = store.guesses[
+              store.currentGuess
+            ].slice(0, -1);
+          }}
+        >
+          Undo
+        </button>
+        <button
+          className="px-6 rounded-md m-px flex items-center justify-center uppercase border border-gray-400 bg-black"
+          onClick={() => {
+            if (store.won || store.lost) return;
+            store.submitGuess();
+          }}
+        >
+          Enter
+        </button>
+      </div>
     </div>
   );
 };
